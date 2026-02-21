@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History at Sacramento State | History Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a3a2a;
+    --green-mid: #2d5a3d;
+    --green-light: #3d7a52;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e9c8;
+    --cream: #faf6ee;
+    --ink: #1a1810;
+    --ink-soft: #3d3a2e;
+    --rule: rgba(201,168,76,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(26,58,42,0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,233,200,0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--green);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    padding-top: 56px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(45,90,61,0.6) 0%, transparent 60%);
+  }
+  .hero-text {
+    position: relative;
+    z-index: 2;
+    padding: 8rem 4rem 6rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-kicker::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--cream);
+    margin-bottom: 2rem;
+  }
+  .hero h1 em {
+    display: block;
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: rgba(245,233,200,0.75);
+    max-width: 440px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--gold);
+    color: var(--green);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    font-weight: 500;
+    transition: all 0.25s;
+    width: fit-content;
+  }
+  .hero-cta:hover {
+    background: var(--gold-light);
+    gap: 1.25rem;
+  }
+  .hero-stats {
+    position: relative;
+    z-index: 2;
+    padding: 8rem 5rem 6rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  .stat-block {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s forwards;
+  }
+  .stat-block:nth-child(1) { animation-delay: 0.3s; }
+  .stat-block:nth-child(2) { animation-delay: 0.5s; }
+  .stat-block:nth-child(3) { animation-delay: 0.7s; }
+  .stat-block:first-child { border-top: 1px solid rgba(201,168,76,0.2); }
+  .stat-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 0.9rem;
+    color: rgba(245,233,200,0.7);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION DEFAULTS */
+  section { position: relative; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* INTRO BAND */
+  .intro-band {
+    background: var(--gold-pale);
+    padding: 5rem 0;
+    border-top: 3px solid var(--gold);
+  }
+  .intro-band blockquote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--green);
+    line-height: 1.4;
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 2rem;
+  }
+  .intro-band blockquote span {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-style: normal;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-top: 1.5rem;
+  }
+
+  /* WHY SAC STATE */
+  .why-section {
+    padding: 7rem 0;
+    background: var(--cream);
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-top: 3.5rem;
+  }
+  .why-lead h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+  }
+  .why-lead p {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+  }
+  .why-lead .highlight {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--green-mid);
+    border-left: 3px solid var(--gold);
+    padding-left: 1.25rem;
+    margin: 2rem 0;
+  }
+  .pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .pillar {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .pillar:first-child { border-top: 1px solid var(--rule); }
+  .pillar-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    padding-top: 0.2rem;
+  }
+  .pillar h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+  }
+  .pillar p {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* CAREERS */
+  .careers-section {
+    padding: 7rem 0;
+    background: var(--green);
+    overflow: hidden;
+  }
+  .careers-section .section-label { color: var(--gold-light); }
+  .careers-section .section-label::after { background: rgba(201,168,76,0.2); }
+  .careers-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+  .careers-header h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+  .careers-header p {
+    color: rgba(245,233,200,0.7);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+  .career-card {
+    background: var(--green);
+    padding: 2.5rem 2rem;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .career-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.3s;
+  }
+  .career-card:hover { background: var(--green-mid); }
+  .career-card:hover::before { height: 100%; }
+  .career-icon {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  .career-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 0.75rem;
+  }
+  .career-card p {
+    font-size: 0.88rem;
+    color: rgba(245,233,200,0.65);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .career-card ul {
+    margin-top: 0.75rem;
+    padding-left: 0;
+    list-style: none;
+  }
+  .career-card ul li {
+    font-size: 0.82rem;
+    color: rgba(245,233,200,0.55);
+    line-height: 1.6;
+    font-weight: 300;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .career-card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  /* SKILLS */
+  .skills-section {
+    padding: 7rem 0;
+    background: var(--cream);
+  }
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 5rem;
+    margin-top: 3.5rem;
+    align-items: start;
+  }
+  .skills-intro h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+  }
+  .skills-intro p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .skills-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .skill-item {
+    padding: 1.75rem 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+  }
+  .skill-item:nth-child(2n) { border-right: none; }
+  .skill-item:nth-last-child(-n+2) { border-bottom: none; }
+  .skill-item h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+  }
+  .skill-item p {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* PROFILES */
+  .profiles-section {
+    padding: 7rem 0;
+    background: var(--ink);
+  }
+  .profiles-section .section-label { color: var(--gold); }
+  .profiles-section .section-label::after { background: rgba(201,168,76,0.2); }
+  .profiles-section h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    color: var(--cream);
+    max-width: 600px;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .profiles-section .section-sub {
+    color: rgba(245,233,200,0.55);
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-bottom: 4rem;
+  }
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.05);
+  }
+  .profile-card {
+    background: var(--ink);
+    padding: 3rem 2.5rem;
+    transition: background 0.25s;
+  }
+  .profile-card:hover { background: #242118; }
+  .profile-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .profile-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 1.25rem;
+  }
+  .profile-card blockquote {
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold-light);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.25rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+  .profile-card p {
+    font-size: 0.88rem;
+    color: rgba(245,233,200,0.6);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* LAW & SOCIAL JUSTICE */
+  .lsj-section {
+    padding: 7rem 0;
+    background: var(--gold-pale);
+    border-top: 3px solid var(--gold);
+  }
+  .lsj-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .lsj-text .section-label { color: var(--green-mid); }
+  .lsj-text .section-label::after { background: rgba(45,90,61,0.2); }
+  .lsj-text h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .lsj-text p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .lsj-callout {
+    background: var(--green);
+    color: var(--cream);
+    padding: 3rem;
+  }
+  .lsj-callout h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 1.25rem;
+  }
+  .lsj-callout ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .lsj-callout ul li {
+    font-size: 0.9rem;
+    color: rgba(245,233,200,0.8);
+    font-weight: 300;
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .lsj-callout ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.75rem;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 8rem 0;
+    background: var(--green);
+    text-align: center;
+  }
+  .cta-section .section-label { justify-content: center; }
+  .cta-section .section-label::after,
+  .cta-section .section-label::before { display: none; }
+  .cta-section h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .cta-section h2 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .cta-section p {
+    font-size: 1.1rem;
+    color: rgba(245,233,200,0.65);
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.75;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--green);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 2.25rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-outline {
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--gold-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 2.25rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold-light); color: var(--cream); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,233,200,0.3);
+    text-transform: uppercase;
+  }
+  footer span { color: var(--gold); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-stats { display: none; }
+    .hero-text { padding: 4rem 2rem 4rem; }
+    .why-grid, .careers-header, .skills-layout, .lsj-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .career-grid { grid-template-columns: 1fr; }
+    .profiles-grid { grid-template-columns: 1fr; }
+    .skills-list { grid-template-columns: 1fr; }
+    .skill-item { border-right: none !important; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sac State History Club</div>
+  <ul class="nav-links">
+    <li><a href="#why">Why Sac State</a></li>
+    <li><a href="#careers">Careers</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#lsj">Law & Justice</a></li>
+    <li><a href="#join">Get Involved</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-kicker">Sacramento State History Club</p>
+    <h1>History is <em>not a backup plan.</em></h1>
+    <p class="hero-sub">Sacramento State produces more history graduates than almost any university in California. Find out why — and what you can actually do with this degree.</p>
+    <a href="#why" class="hero-cta">Discover the Department →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-block">
+      <div class="stat-number">#2</div>
+      <div class="stat-label">History degree producer in California, second only to UCLA</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">R2</div>
+      <div class="stat-label">Carnegie Research Classification — real research happens here</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">Small</div>
+      <div class="stat-label">Smaller class sizes than neighboring UC campuses</div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO BAND -->
+<div class="intro-band">
+  <div class="section-inner">
+    <blockquote>
+      "We produce UCLA-level historians. We just also know their names."
+      <span>— Sacramento State History Club</span>
+    </blockquote>
+  </div>
+</div>
+
+<!-- WHY SAC STATE -->
+<section class="why-section" id="why">
+  <div class="section-inner">
+    <p class="section-label">Why Sacramento State</p>
+    <div class="why-grid">
+      <div class="why-lead">
+        <h2>A serious research university that still feels like home.</h2>
+        <p>Sacramento State recently earned R2 Carnegie Research Classification — a designation that means this is a place where original scholarship happens, not just coursework. When you study here, you learn from faculty who are actively contributing to historical knowledge, not just teaching from someone else's textbook.</p>
+        <div class="highlight">"Your professors have published books. They've been in the archives. They know what real historical research looks like — because they do it."</div>
+        <p>And unlike the large UC campuses down the road, you'll actually get to know them.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <span class="pillar-num">01</span>
+          <div>
+            <h3>R2 Research University</h3>
+            <p>Our new Carnegie R2 designation means Sac State is officially recognized as a high-research university. Your degree comes with that credibility — and your experience here reflects it.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">02</span>
+          <div>
+            <h3>Published Faculty</h3>
+            <p>Our historians have written and published original monographs. You'll be learning from scholars who are still actively asking and answering big historical questions.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">03</span>
+          <div>
+            <h3>The Clio</h3>
+            <p>Our award-winning student-driven publication gives you the chance to publish original research as an undergraduate — something most institutions can't offer.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">04</span>
+          <div>
+            <h3>Robust Public History Program</h3>
+            <p>One of the strongest in the region, connecting students to museums, archives, government agencies, and community organizations across Sacramento and beyond.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">05</span>
+          <div>
+            <h3>Sacramento Is Your Classroom</h3>
+            <p>You're in the state capital. The California State Archives, state legislature, federal courts, and a vast network of nonprofits and agencies are right outside the door.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">06</span>
+          <div>
+            <h3>Phi Alpha Theta</h3>
+            <p>Our active history honor society connects you with a national network of historians, scholars, and professionals — and looks great on every application you'll ever submit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section class="careers-section" id="careers">
+  <div class="section-inner">
+    <p class="section-label">What Can You Do With This Degree</p>
+    <div class="careers-header">
+      <h2>Almost anything. Here's the longer answer.</h2>
+      <p>A history degree trains you to research, think critically, write with precision, and make arguments that hold up under scrutiny. That skill set travels. Far.</p>
+    </div>
+    <div class="career-grid">
+      <div class="career-card">
+        <div class="career-icon">⚖️</div>
+        <h3>Law & Policy</h3>
+        <p>History majors are among the strongest law school applicants. The reading, writing, and argumentation skills you build here are exactly what law schools are looking for.</p>
+        <ul>
+          <li>Attorney / Law School</li>
+          <li>Legislative Staff</li>
+          <li>Policy Analyst</li>
+          <li>Civil Rights Advocacy</li>
+        </ul>
+      </div>
+      <div class="career-card">
+        <div class="career-icon">🏛️</div>
+        <h3>Public History</h3>
+        <p>Sacramento State has one of the strongest public history programs in the region. Graduates go on to work in museums, archives, historic preservation, and community organizations.</p>
+        <ul>
+          <li>Archivist / Curator</li>
+          <li>Museum Professional</li>
+          <li>Historic Preservation</li>
+          <li>Cultural Resource Management</li>
+        </ul>
+      </div>
+      <div class="career-card">
+        <div class="career-icon">🏛️</div>
+        <h3>Government & Public Service</h3>
+        <p>You're in Sacramento. The state legislature, federal agencies, courts, and regulatory bodies all need people who can research, write, and think historically.</p>
+        <ul>
+          <li>Government Historian</li>
+          <li>State & Federal Agencies</li>
+          <li>Foreign Service</li>
+          <li>Intelligence & National Security</li>
+        </ul>
+      </div>
+      <div class="career-card">
+        <div class="career-icon">📚</div>
+        <h3>Education</h3>
+        <p>From K–12 classrooms to community colleges and universities, history graduates shape how the next generation understands the world they inherited.</p>
+        <ul>
+          <li>Secondary Education</li>
+          <li>Community College Instructor (MA)</li>
+          <li>University Professor (PhD)</li>
+          <li>Curriculum Development</li>
+        </ul>
+      </div>
+      <div class="career-card">
+        <div class="career-icon">✍️</div>
+        <h3>Media & Communications</h3>
+        <p>Journalists, documentary filmmakers, editors, and communications professionals all do better work when they understand context, evidence, and how to tell a story that holds up.</p>
+        <ul>
+          <li>Journalism & Reporting</li>
+          <li>Documentary & Media</li>
+          <li>Publishing & Editorial</li>
+          <li>Content Strategy</li>
+        </ul>
+      </div>
+      <div class="career-card">
+        <div class="career-icon">🌐</div>
+        <h3>Nonprofit & Business</h3>
+        <p>Research skills, writing ability, and the capacity to synthesize complex information make history graduates valuable in organizations across every sector.</p>
+        <ul>
+          <li>Nonprofit Management</li>
+          <li>Corporate Research</li>
+          <li>Human Resources</li>
+          <li>Consulting & Strategy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-inner">
+    <p class="section-label">What You Actually Learn</p>
+    <div class="skills-layout">
+      <div class="skills-intro">
+        <h2>The skills employers keep asking for.</h2>
+        <p>When employers say they can't find people who can write, think critically, or communicate complex ideas clearly — they're describing exactly what a history degree produces. These aren't soft skills. They're the ones that differentiate people in almost every professional field.</p>
+      </div>
+      <div class="skills-list">
+        <div class="skill-item">
+          <h4>Research & Investigation</h4>
+          <p>Finding, evaluating, and synthesizing information from complex, contradictory, or incomplete sources.</p>
+        </div>
+        <div class="skill-item">
+          <h4>Written Communication</h4>
+          <p>Constructing clear, evidence-based arguments in writing — one of the most consistently in-demand professional skills.</p>
+        </div>
+        <div class="skill-item">
+          <h4>Critical Analysis</h4>
+          <p>Interrogating sources, identifying bias, distinguishing correlation from causation, and evaluating competing claims.</p>
+        </div>
+        <div class="skill-item">
+          <h4>Cross-Cultural Fluency</h4>
+          <p>Understanding how context, culture, and perspective shape events, decisions, and people — essential in any global environment.</p>
+        </div>
+        <div class="skill-item">
+          <h4>Oral Presentation</h4>
+          <p>Making complex arguments accessible and persuasive to a variety of audiences.</p>
+        </div>
+        <div class="skill-item">
+          <h4>Long-Form Thinking</h4>
+          <p>Managing large projects, sustained arguments, and complex material over time — the discipline that drives every career forward.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAW & SOCIAL JUSTICE -->
+<section class="lsj-section" id="lsj">
+  <div class="section-inner">
+    <div class="lsj-inner">
+      <div class="lsj-text">
+        <p class="section-label">Concentration</p>
+        <h2>Law & Social Justice</h2>
+        <p>Sacramento State offers a Law and Social Justice concentration within the History major — one of the few programs in the CSU system that makes this connection explicit and purposeful.</p>
+        <p>If you're thinking about law school, a career in civil rights or advocacy, government service, or social justice work, this concentration gives you the historical foundation and analytical tools to do that work with depth and credibility.</p>
+        <p>And you're in Sacramento — which means the legislature, courts, and advocacy organizations you want to work with are already right here.</p>
+      </div>
+      <div class="lsj-callout">
+        <h3>Where this concentration leads</h3>
+        <ul>
+          <li>Law school preparation and legal careers</li>
+          <li>Civil rights and advocacy organizations</li>
+          <li>State and federal legislative staff roles</li>
+          <li>Nonprofit leadership and community organizing</li>
+          <li>Policy research and government agencies</li>
+          <li>Social justice education and curriculum work</li>
+          <li>Immigration and human rights law</li>
+          <li>Public defender and legal aid offices</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER PROFILES -->
+<section class="profiles-section">
+  <div class="section-inner">
+    <p class="section-label">Real Careers, Real People</p>
+    <h2>What history graduates actually do.</h2>
+    <p class="section-sub">These are the kinds of careers a history degree opens — across industries, sectors, and fields you might not expect.</p>
+    <div class="profiles-grid">
+      <div class="profile-card">
+        <p class="profile-role">Government & Public Service</p>
+        <h3>The Government Historian</h3>
+        <blockquote>"I get to travel the world conducting research. My history degree taught me to ask the right questions — and that's the whole job."</blockquote>
+        <p>History graduates work as historians for federal agencies including the State Department, Department of Defense, and National Park Service. They conduct field research, manage archival collections, and write the official record of institutions that shape public life.</p>
+      </div>
+      <div class="profile-card">
+        <p class="profile-role">Archives & Special Collections</p>
+        <h3>The Archivist</h3>
+        <blockquote>"I can't tell you how many times I've drawn on what I learned studying historiography. Those questions stay with you your whole career."</blockquote>
+        <p>From university libraries to corporate archives, city governments to international institutions, archivists preserve and provide access to the records that make history possible. A history BA pairs naturally with a library science MA to open this path.</p>
+      </div>
+      <div class="profile-card">
+        <p class="profile-role">Law & Policy</p>
+        <h3>The Attorney</h3>
+        <blockquote>"Law school was a direct extension of what I learned to do as a history major — research, write, argue from evidence. The transition was natural."</blockquote>
+        <p>History is one of the strongest pre-law majors because it builds exactly the skills law schools select for. LSAT scores, writing ability, and comfort with complex reading materials all benefit from a rigorous history education.</p>
+      </div>
+      <div class="profile-card">
+        <p class="profile-role">Education</p>
+        <h3>The Educator</h3>
+        <blockquote>"As teachers we're expected to use multiple resources, reading, and writing to help students make deeper connections. Those are precisely the things I learned in my history courses."</blockquote>
+        <p>From high school classrooms to community colleges and universities, history educators play a critical role in shaping how students understand the world. California's schools need qualified history teachers — and the job market reflects it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="join">
+  <div class="section-inner">
+    <p class="section-label">Get Involved</p>
+    <h2>This could be <em>your story.</em></h2>
+    <p>The Sacramento State History Department is one of the most productive history programs in California. Come find out what that means for you.</p>
+    <div class="cta-buttons">
+      <a href="https://www.csus.edu/college/social-sciences-interdisciplinary-studies/history/" class="btn-primary" target="_blank">Visit the Department</a>
+      <a href="#" class="btn-outline">Join the History Club</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Presented by the <span>Sacramento State History Club</span> · This page is a student initiative and is not an official publication of California State University, Sacramento.</p>
+</footer>
+
+</body>
+</html>
